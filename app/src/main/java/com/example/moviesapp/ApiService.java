@@ -19,15 +19,4 @@ public interface ApiService {
     @GET("review?token=B4SYYRK-VMHMMS2-G67AVP8-1JD6P9Z&&field=movieId")
     Single<ReviewResponse> loadReviews(@Query("search") int id);
 
-    @GET("movie?token=B4SYYRK-VMHMMS2-G67AVP8-1JD6P9Z")
-    Single<MovieResponse> loadMoviesWithFilters(
-            @Query("genre.name") List<String> options,
-            @Query("sortfield") String sortfield,
-            @Query("sorttype") int sorttype
-    );
-
-    // TODO МЕТОД ТОЛЬКОК НАПИСАН В СЕРВИСЕ, БОЛЬШЕ ЕГО
-    //  УПОМИНАНИЯ НИГДЕ НЕТУЦ, НЕОБХОДИМО ДОДЕЛАТЬ ВСЁ
-    //  НАДО ТАКЖЕ ДОДЕЛАТЬ ПАРАМЕТРЫ В МЕТОДЕ С ФИЛЬТРАМИ НА СТРОКЕК 22 В ЭТОМ КЛАССЕ
-
 }
