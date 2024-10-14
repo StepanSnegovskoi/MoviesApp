@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,8 +21,6 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class MovieDetailActivity extends AppCompatActivity {
-
-    private static final String TAG = "MovieDetailActivity";
     private static final String EXTRA_MOVIE = "movie";
 
     private MovieDetailViewModel viewModel;

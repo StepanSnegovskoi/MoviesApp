@@ -17,7 +17,7 @@ public class FavouriteMoviesViewModel extends AndroidViewModel {
         movieDao = MovieDatabase.getInstance(application).movieDao();
     }
 
-    public LiveData<List<Movie>> getMovies() {
+    public LiveData<List<Movie>> getMovies()     {
         return movieDao.getAllFavouriteMovies();
     }
 }

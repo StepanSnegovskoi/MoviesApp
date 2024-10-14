@@ -62,7 +62,7 @@ public class MovieDetailViewModel extends AndroidViewModel {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Throwable {
-                        Log.d(TAG, throwable.toString());
+                        Log.d(TAG, throwable.toString() + " Review");
                     }
                 });
         compositeDisposable.add(disposable);
@@ -89,6 +89,7 @@ public class MovieDetailViewModel extends AndroidViewModel {
                 .map(new Function<TrailerResponse, List<Trailer>>() {
                     @Override
                     public List<Trailer> apply(TrailerResponse trailerResponse) throws Throwable {
+                        Log.d(TAG, trailerResponse.toString());
                         return trailerResponse.getTrailersList().getTrailers();
                     }
                 })
@@ -96,11 +97,13 @@ public class MovieDetailViewModel extends AndroidViewModel {
                     @Override
                     public void accept(List<Trailer> trailerList) throws Throwable {
                         trailers.setValue(trailerList);
+                        Log.d(TAG, trailerList.toString());
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Throwable {
-                        Log.d(TAG, throwable.toString());
+                        Log.d(TAG, throwable.toString() + " Trailer");
+
                     }
                 });
         compositeDisposable.add(disposable);
