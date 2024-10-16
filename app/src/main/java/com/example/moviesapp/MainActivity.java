@@ -19,7 +19,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel viewModel;
-
     private RecyclerView recyclerViewMovies;
     private ProgressBar progressBarLoading;
     private MoviesAdapter moviesAdapter;
@@ -29,11 +28,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressBarLoading = findViewById(R.id.progressBarLoading);
-        recyclerViewMovies = findViewById(R.id.recyclerViewMovies);
+        initViews();
         moviesAdapter = new MoviesAdapter();
         recyclerViewMovies.setAdapter(moviesAdapter);
-        recyclerViewMovies.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerViewMovies.setLayoutManager(new GridLayoutManager(this, 2));
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         viewModel.getMovies().observe(this, new Observer<List<Movie>>() {
             @Override
@@ -79,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initViews() {
+        progressBarLoading = findViewById(R.id.progressBarLoading);
+        recyclerViewMovies = findViewById(R.id.recyclerViewMovies);
     }
 }
 

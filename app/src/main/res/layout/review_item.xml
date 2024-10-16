@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textColor="@color/white"
-            tools:text="Very long text" />
+            tools:text="Very long text\nVery long text\nVery long text\nVery long text" />
 
     </LinearLayout>
 

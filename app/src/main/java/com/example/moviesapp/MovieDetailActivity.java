@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,16 +69,23 @@ public class MovieDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        viewModel.loadReviews(movie.getId());
         viewModel.getReviews().observe(this, new Observer<List<Review>>() {
             @Override
             public void onChanged(List<Review> reviewList) {
                 reviewsAdapter.setReviews(reviewList);
             }
         });
-        viewModel.loadReviews(movie.getId());
 
-        Drawable starOff = ContextCompat.getDrawable(MovieDetailActivity.this, android.R.drawable.star_big_off);
-        Drawable starOn = ContextCompat.getDrawable(MovieDetailActivity.this, android.R.drawable.star_big_on);
+        Drawable starOff = ContextCompat.getDrawable(
+                MovieDetailActivity.this,
+                android.R.drawable.star_big_off
+        );
+
+        Drawable starOn = ContextCompat.getDrawable(
+                MovieDetailActivity.this,
+                android.R.drawable.star_big_on
+        );
 
         viewModel.getFavouriteMovie(movie.getId()).observe(this, new Observer<Movie>() {
             @Override

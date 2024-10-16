@@ -32,23 +32,31 @@ android {
 }
 
 dependencies {
-    implementation (libs.appcompat)
-    implementation (libs.material)
-    implementation (libs.constraintlayout)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
 
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
-    implementation (libs.adapter.rxjava3)
+    // Работа с интернетом
+    implementation(libs.retrofit)
 
-    implementation (libs.rxandroid)
-    implementation (libs.rxjava)
+    // Преобразует джейсон в объекты наших классов
+    implementation(libs.converter.gson)
 
-    implementation (libs.room.runtime)
-    annotationProcessor (libs.room.compiler)
-    implementation (libs.room.rxjava3)
+    // Многопоточность
+    // Адаптер для связи ретрофита и RxJava
+    implementation(libs.adapter.rxjava3)
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava)
+    implementation(libs.room.rxjava3)
 
-    implementation (libs.glide)
-    annotationProcessor (libs.compiler)
+    // База данных
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+
+    // Вставка картинок по URL
+    implementation(libs.glide)
+
+    annotationProcessor(libs.compiler)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
