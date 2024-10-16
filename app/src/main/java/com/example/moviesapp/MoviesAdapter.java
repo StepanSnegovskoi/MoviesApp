@@ -1,7 +1,6 @@
 package com.example.moviesapp;
 
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DiffUtil.DiffResult;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
-
     private List<Movie> movies = new ArrayList<>();
 
     private OnReachEndListener onReachEndListener;
@@ -33,8 +33,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     public void setMovies(List<Movie> movies) {
+        MovieCallBack callback = new MovieCallBack(this.movies, movies);
+        DiffResult diffResult = DiffUtil.calculateDiff(callback);
+        diffResult.dispatchUpdatesTo(this);
         this.movies = movies;
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -50,19 +52,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        Log.d("MoviesAdapter", "onBindViewHolder: " + position);
         Movie movie = movies.get(position);
-        if(movie.getPoster() != null){
+        if (movie.getPoster() != null) {
             Glide.with(holder.itemView)
                     .load(movie.getPoster().getUrl())
                     .into(holder.imageViewPoster);
         }
+
         double rating;
-        if(movie.getRating() != null){
+        if (movie.getRating() != null) {
             rating = movie.getRating().getKp();
-        } else{
+        } else {
             rating = -1;
         }
+
         int backgroundId;
         if (rating > 7) {
             backgroundId = R.drawable.circle_green;
@@ -71,7 +74,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         } else {
             backgroundId = R.drawable.circle_red;
         }
-        Drawable background = ContextCompat.getDrawable(holder.itemView.getContext(), backgroundId);
+
+        Drawable background = ContextCompat.getDrawable(
+                holder.itemView.getContext(),
+                backgroundId
+        );
+
         holder.textViewRating.setBackground(background);
         holder.textViewRating.setText(String.valueOf(rating));
 
@@ -95,17 +103,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     interface OnReachEndListener {
-
         void onReachEnd();
     }
 
     interface OnMovieClickListener {
-
         void onMovieClick(Movie movie);
     }
 
     static class MovieViewHolder extends RecyclerView.ViewHolder {
-
         private final ImageView imageViewPoster;
         private final TextView textViewRating;
 

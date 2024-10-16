@@ -20,13 +20,14 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class MainViewModel extends AndroidViewModel {
 
     private static final String TAG = "MainViewModel";
+    private static final int START_PAGE = 1;
 
     private final MutableLiveData<List<Movie>> movies = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private int page = 1;
+    private int page = START_PAGE;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -71,7 +72,6 @@ public class MainViewModel extends AndroidViewModel {
                         } else {
                             movies.setValue(movieResponse.getMovies());
                         }
-                        Log.d(TAG, "Loaded: " + page);
                         page++;
                     }
                 }, new Consumer<Throwable>() {
